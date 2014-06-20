@@ -49,7 +49,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="LocationsViewModel.cs" />
     <Compile Include="POIService.cs" />
     <Compile Include="SampleItems.cs" />
     <Page Include="MainWindow.xaml">
