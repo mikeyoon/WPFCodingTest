@@ -1,0 +1,7 @@
+C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\Caching\FileDbCache\bin\Debug\FileDbCache.dll
+C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\Caching\FileDbCache\bin\Debug\FileDbCache.pdb
+C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\Caching\FileDbCache\bin\Debug\FileDb.dll
+C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\Caching\FileDbCache\bin\Debug\FileDb.xml
+C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\Caching\FileDbCache\obj\Debug\FileDbCache.csprojResolveAssemblyReference.cache
+C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\Caching\FileDbCache\obj\Debug\FileDbCache.dll
+C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\Caching\FileDbCache\obj\Debug\FileDbCache.pdb

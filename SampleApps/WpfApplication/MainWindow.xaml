@@ -1,0 +1,108 @@
+﻿<Window x:Class="WpfApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
+        xmlns:local="clr-namespace:WpfApplication"
+        Title="XAML MapControl - WPF Test Application" Height="600" Width="800"
+        DataContext="{Binding App.LocationsViewModel}">
+    <Window.Resources>
+        <map:TileLayerCollection x:Key="TileLayers">
+            <map:TileLayer SourceName="Google Images" Description="Google Maps - © {y} Google" Background="#FF3F3F3F" Foreground="White"
+                           TileSource="http://khm{i}.google.com/kh/v=135&amp;x={x}&amp;y={y}&amp;z={z}" MaxZoomLevel="20"/>
+            <map:TileLayer SourceName="Google Maps" Description="Google Maps - © {y} Google"
+                           TileSource="http://mt{i}.google.com/vt/x={x}&amp;y={y}&amp;z={z}" MaxZoomLevel="20"/>
+            <map:TileLayer SourceName="OpenStreetMap" Description="© {y} OpenStreetMap Contributors, CC-BY-SA"
+                           TileSource="http://{c}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+            <map:TileLayer SourceName="OpenCycleMap" Description="OpenCycleMap - © {y} Andy Allen &amp; OpenStreetMap Contributors, CC-BY-SA"
+                           TileSource="http://{c}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"/>
+            <map:TileLayer SourceName="OCM Transport" Description="OpenCycleMap Transport - © {y} Andy Allen &amp; OpenStreetMap Contributors, CC-BY-SA"
+                           TileSource="http://{c}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png"/>
+            <map:TileLayer SourceName="OCM Landscape" Description="OpenCycleMap Landscape - © {y} Andy Allen &amp; OpenStreetMap Contributors, CC-BY-SA"
+                           TileSource="http://{c}.tile3.opencyclemap.org/landscape/{z}/{x}/{y}.png"/>
+            <map:TileLayer SourceName="MapQuest OSM" Description="MapQuest OSM - © {y} MapQuest &amp; OpenStreetMap Contributors"
+                           TileSource="http://otile{n}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png"/>
+            
+            <map:TileLayer SourceName="Bing Maps" Description="Bing Maps - © {y} Microsoft Corporation"
+                           TileSource="http://ecn.t{i}.tiles.virtualearth.net/tiles/r{q}.png?g=0&amp;stl=h" MaxZoomLevel="20"/>
+            <map:TileLayer SourceName="Bing Images" Description="Bing Maps - © {y} Microsoft Corporation" Background="#FF3F3F3F" Foreground="White"
+                           TileSource="http://ecn.t{i}.tiles.virtualearth.net/tiles/a{q}.jpeg?g=0" MaxZoomLevel="20"/>
+            <map:TileLayer SourceName="Bing Hybrid" Description="Bing Maps - © {y} Microsoft Corporation" Background="#FF3F3F3F" Foreground="White"
+                           TileSource="http://ecn.t{i}.tiles.virtualearth.net/tiles/h{q}.jpeg?g=0&amp;stl=h" MaxZoomLevel="20"/>
+
+            <!-- The following TileLayer demonstrates how to access local tile image files (from ImageFileCache here) -->
+            <map:TileLayer SourceName="OSM Local Files" Description="© {y} OpenStreetMap Contributors, CC-BY-SA"
+                           TileSource="file:///C:/Users/jwortley/Documents/Airware/Cache/{z}/{x}/{y}.jpg"/>
+        </map:TileLayerCollection>
+        <map:TileLayer x:Key="SeamarksTileLayer" SourceName="Seamarks" Description="© {y} OpenSeaMap Contributors, CC-BY-SA"
+                       TileSource="http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png" MinZoomLevel="10" MaxZoomLevel="18"/>
+        <CollectionViewSource x:Key="TileLayersViewSource" Source="{StaticResource TileLayers}"/>
+        <local:LocationToVisibilityConverter x:Key="LocationToVisibilityConverter"/>
+        <DataTemplate x:Key="PolylineItemTemplate">
+            <map:MapPolyline Locations="{Binding Locations}" Stroke="Red" StrokeThickness="3"/>
+        </DataTemplate>
+        <Style x:Key="PolylineItemStyle" TargetType="map:MapItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="map:MapItem">
+                        <map:MapPolyline Locations="{Binding Locations}" Stroke="Red" StrokeThickness="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <local:SampleItemCollection x:Key="Polylines"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <map:Map x:Name="map" Margin="2" Center="53.5,8.2" ZoomLevel="11" MaxZoomLevel="20"
+                 TileLayer="{Binding Source={StaticResource TileLayersViewSource}, Path=CurrentItem}"
+                 MouseLeftButtonDown="MapMouseLeftButtonDown" MouseRightButtonDown="MapMouseRightButtonDown"
+                 MouseMove="MapMouseMove" MouseLeave="MapMouseLeave"
+                 ManipulationInertiaStarting="MapManipulationInertiaStarting">
+
+            <!-- Example line to render data on the map -->
+            <map:MapItemsControl ItemsSource="{StaticResource Polylines}"
+                                 ItemTemplate="{StaticResource PolylineItemTemplate}"/>
+            
+            <!-- Insert POI display here -->
+            <!-- Use a map:MapPolyline for displaying. Property is Locations, which uses a collection of Location. -->
+            <!--<map:MapPolyline Locations="{Binding Whatever}" Stroke="Red" StrokeThickness="3"/>-->
+            
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="4" FontSize="10"
+                       Text="{Binding TileLayer.Description, ElementName=map}"/>
+        </map:Map>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding Refresh}">Refresh</Button>
+            <TextBlock x:Name="mouseLocation" Margin="5" VerticalAlignment="Bottom" FontFamily="Segoe UI Mono"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Zoom Level" Margin="0,0,0,2" HorizontalAlignment="Center" Foreground="Gray" FontSize="10"/>
+                    <Slider ToolTip="Zoom Level" Width="100" VerticalAlignment="Center" SmallChange="0.01"
+                            Minimum="{Binding MinZoomLevel, ElementName=map}"
+                            Maximum="{Binding MaxZoomLevel, ElementName=map}"
+                            Value="{Binding TargetZoomLevel, ElementName=map}"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <TextBlock Text="Heading" Margin="0,0,0,2" HorizontalAlignment="Center" Foreground="Gray" FontSize="10"/>
+                    <Slider ToolTip="Heading" Width="100" VerticalAlignment="Center" SmallChange="5" LargeChange="45"
+                            Minimum="0" Maximum="360" Value="{Binding TargetHeading, ElementName=map}"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <TextBlock Text="Image Opacity" Margin="0,0,0,2" HorizontalAlignment="Center" Foreground="Gray" FontSize="10"/>
+                    <Slider ToolTip="Image Opacity" Width="100" VerticalAlignment="Center"
+                            Minimum="0" Maximum="1" Value="{Binding Opacity, ElementName=mapImage}"/>
+                </StackPanel>
+                <CheckBox ToolTip="Seamarks Overlay" Margin="7" VerticalAlignment="Bottom" Content="Seamarks" Click="SeamarksClick"/>
+                <ComboBox ToolTip="Tile Layer" Margin="5" VerticalAlignment="Bottom" DisplayMemberPath="SourceName"
+                          SelectedIndex="0" ItemsSource="{Binding Source={StaticResource TileLayersViewSource}}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

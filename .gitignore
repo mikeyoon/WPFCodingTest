@@ -1,0 +1,6 @@
+*.suo
+Caching\FileDbCache\bin\Debug
+Caching\FileDbCache\obj\Debug
+SampleApps/WpfApplication/obj/
+MapControl/obj/
+SampleApps/WpfApplication/bin/
