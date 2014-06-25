@@ -65,14 +65,14 @@
 
             <!-- Example line to render data on the map -->
             <map:MapItemsControl ItemsSource="{StaticResource Polylines}"
-                                 ItemTemplate="{StaticResource PolylineItemTemplate}"/>
+                                 ItemTemplate="{StaticResource PolylineItemTemplate}" />
             
             <!-- Insert POI display here -->
             <!-- Use a map:MapPolyline for displaying. Property is Locations, which uses a collection of Location. -->
-            <!--<map:MapPolyline Locations="{Binding Whatever}" Stroke="Red" StrokeThickness="3"/>-->
+            <!--<map:MapPolyline Locations="{Binding LocationsSource}" Stroke="Red" StrokeThickness="3"/>-->
             
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="4" FontSize="10"
-                       Text="{Binding TileLayer.Description, ElementName=map}"/>
+                       Text="{Binding TileLayer.Description, ElementName=map}" />
         </map:Map>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
