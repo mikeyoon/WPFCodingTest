@@ -1,6 +1,0 @@
-C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\SampleApps\SilverlightApplication.Web\bin\SilverlightApplication.Web.dll.config
-C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\SampleApps\SilverlightApplication.Web\bin\SilverlightApplication.Web.dll
-C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\SampleApps\SilverlightApplication.Web\bin\SilverlightApplication.Web.pdb
-C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\SampleApps\SilverlightApplication.Web\obj\Debug\SilverlightApplication.Web.csprojResolveAssemblyReference.cache
-C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\SampleApps\SilverlightApplication.Web\obj\Debug\SilverlightApplication.Web.dll
-C:\Users\jwortley\Downloads\xamlmapcontrol-aa04fd0551ab55be0a39211dc8d62c7cf0379bd0\SampleApps\SilverlightApplication.Web\obj\Debug\SilverlightApplication.Web.pdb
